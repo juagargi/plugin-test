@@ -1,5 +1,9 @@
 package plugin
 
+import "github.com/juagargi/plugin-test/pkg/snet"
+
 type PathHandler interface {
-	Declare() string
+	Doc() string
+	PathType() string
+	Handler() snet.PacketHandlerFunc
 }

@@ -5,6 +5,8 @@ import (
 	"plugin"
 )
 
+type Declare func() string
+
 func Load(filename string) *Plugin {
 	// Open dynamically linked entry point.
 	plugin, err := plugin.Open(filename)
@@ -25,14 +27,30 @@ func Load(filename string) *Plugin {
 	}
 
 	// Wrap the plugin.
-	p := Plugin{
+	p := &Plugin{
 		Plugin:  *plugin,
 		Declare: declare,
 	}
-	return &p
+
+	// Distribute plugin according to its declaration.
+	declaration := declare()
+	switch declaration {
+	case "path":
+		err := LoadPacketHandlerPlugin(p)
+		if err != nil {
+			panic(err)
+		}
+	default:
+		fmt.Printf("not doing anything with %s , declared as %s\n", filename, declaration)
+	}
+	return p
 }
 
 type Plugin struct {
 	plugin.Plugin
 	Declare func() string
+}
+
+func LoadPacketHandlerPlugin(p *Plugin) error {
+	return nil
 }

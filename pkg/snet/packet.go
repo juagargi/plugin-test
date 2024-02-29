@@ -13,12 +13,16 @@ func AddHandler(packetType string, handler PacketHandlerFunc) error {
 		return fmt.Errorf("there already exists a handler for this type: %s", packetType)
 	}
 	PacketHandlers[packetType] = handler
+	return nil
 }
 
 // Packet is a packet.
 type Packet struct {
 	TypeOfPacket string
 	SizeOfPacket int
+	Ingress      uint16
+	Egress       uint16
+	CurrentHop   int
 }
 
 func (p *Packet) String() string {
