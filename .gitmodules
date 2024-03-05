@@ -1,3 +1,0 @@
-[submodule "plugins/plugin-standalone"]
-	path = plugins/plugin-standalone
-	url = git@github.com:juagargi/plugin-standalone.git
