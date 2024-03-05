@@ -10,7 +10,8 @@ build-app1:
 
 build-plugins:
 	@for dir in ./plugins/*/; do \
-		go build -buildmode=plugin -o ./bin/plugins/ "$$dir/..."; \
+		echo "building $$dir" ; \
+		(cd $$dir && go build -buildmode=plugin -o ../../bin/plugins/ . ); \
 	done
 
 clean:

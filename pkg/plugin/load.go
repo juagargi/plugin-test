@@ -11,7 +11,7 @@ func Load(filename string) *Plugin {
 	// Open dynamically linked entry point.
 	plugin, err := plugin.Open(filename)
 	if err != nil {
-		err = fmt.Errorf("loading plugin %s: %w", filename, err)
+		err = fmt.Errorf("loading plugin %s: %w\nType of error: %T", filename, err, err)
 		panic(err)
 	}
 	// Check for generic Declare symbol.
