@@ -1,0 +1,1 @@
+/home/juan/devel/ETH/plugin-standalone/plugin-standalone.so
