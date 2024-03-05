@@ -15,9 +15,10 @@ build-plugins: external-plugins
 	done
 
 external-plugins:
-	$(foreach external,$(shell cat external_plugins.txt),\
-		@cp $(external) ./bin/plugins/; \
-	)
+	@while IFS= read -r path; do \
+		echo copying $$path; \
+		cp $$path ./bin/plugins/; \
+	done < external_plugins.txt
 
 clean:
 	@find ./bin/ -type f ! -name ".*" -exec rm -f {} +
